@@ -12,32 +12,30 @@ export const Main = () => {
     return (
         <Container>
             <Header />
+            <div className="flex flex-row bg-[#F0F5FA] h-screen px-4">
+                <div className="hidden md:block md:w-[70px] bg-gray-50">
+                <LeftSidebar />
+                </div>
+                <Box sx={{ flexGrow: 1 }}>
+                    <Grid container spacing={3}>
+                        {/* Mobile: Takes full width (12 columns) */}
+                        <Grid item xs={12} sm={3} md={3}>
+                            <Outlet />
+                        </Grid>
 
-            <Box sx={{ flexGrow: 1 }}>
-                <Grid container spacing={3}>
-                    {/* Left-side Slide Navbar */}
-                    {/* Hide this Grid item on mobile screens */}
-                    <Grid item xs={1} sm={1} md={1} sx={{ display: { xs: 'none', sm: 'block', md: 'block' } }}>
-                        <LeftSidebar />
-                    </Grid>
+                        {/* Tablet: Takes 6 columns on small screens and 4 columns on medium and larger screens */}
+                        {/* Hide this Grid item on mobile screens */}
+                        <Grid item xs={6} sm={6} md={5} sx={{ display: { xs: 'none', sm: 'block' } }}>
+                            <Message />
+                        </Grid>
 
-                    {/* Mobile: Takes full width (12 columns) */}
-                    <Grid item xs={12} sm={3} md={3}>
-                        <Outlet />
+                        {/* Desktop: Takes full width (12 columns) */}
+                        <Grid item xs={12} sm={3} md={3}>
+                            <UserProfile />
+                        </Grid>
                     </Grid>
-
-                    {/* Tablet: Takes 6 columns on small screens and 4 columns on medium and larger screens */}
-                    {/* Hide this Grid item on mobile screens */}
-                    <Grid item xs={6} sm={5} md={5} sx={{ display: { xs: 'none', sm: 'block' } }}>
-                        <Message />
-                    </Grid>
-
-                    {/* Desktop: Takes full width (12 columns) */}
-                    <Grid item xs={12} sm={3} md={3}>
-                        <UserProfile />
-                    </Grid>
-                </Grid>
-            </Box>
+                </Box>
+            </div>
         </Container>
     )
 }

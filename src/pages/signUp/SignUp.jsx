@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
-import toast from 'react-hot-toast'
+import { toast } from 'react-toastify';
 
 export const SignUp = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -16,17 +16,35 @@ export const SignUp = () => {
     console.log(data)
     signUpUser(data.email, data.password)
       .then(result => {
-        const loggedUser = result.user;
-        if (loggedUser) {
+        const signInUser = result.user;
+        if (signInUser) {
           toast.dismiss()
-          toast.success('successfully create account')
+          toast.success('successfully create account!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
           navigate('/')
         }
       })
       .catch(error => {
         console.log(error)
         toast.dismiss()
-        toast.error('something went wrong!')
+        toast.warn('something went wrong!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       });
 
   }

@@ -5,14 +5,26 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { router } from './routers/routes.jsx';
-import { Toaster } from 'react-hot-toast';
+import { ToastContainer } from 'react-toastify';
 import AuthProvider from './providers/AuthProvider';
+import 'react-toastify/dist/ReactToastify.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router}/>
-        <Toaster />
+      <RouterProvider router={router} />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </AuthProvider>
   </React.StrictMode>,
 )
