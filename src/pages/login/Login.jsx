@@ -3,11 +3,35 @@ import { TextField } from '@mui/material';
 import { Button } from '@mui/material';
 import { SocialLogin } from "../../components/socailLogin/SocialLogin"
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from 'react-hot-toast'
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 
 export const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const onSubmit = data => console.log(data);
+  const { signIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  // login submit handler
+  const onSubmit = data => {
+    console.log(data)
+    toast.loading('Loading...')
+    signIn(data.email, data.password)
+      .then(result => {
+        const loggedUser = result.user;
+        if (loggedUser) {
+          toast.dismiss()
+          toast.success('successfully login')
+          navigate('/')
+        }
+      })
+      .catch(error => {
+        console.log(error)
+        toast.dismiss()
+        toast.error(' Wrong password!')
+      });
+  };
+
 
   // Custom password validation function
   const validatePassword = (value) => {
@@ -45,7 +69,7 @@ export const Login = () => {
                   <p className="text-sm text-rose-500">{errors.password.message}</p>
                 </div>
               </div>
-            </div>}
+            </div> }
             <div className="-ml-5 mr-3">
               <TextField
                 {...register("email", { required: true })}
