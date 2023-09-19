@@ -10,32 +10,34 @@ import { LeftSidebar } from "../components/leftSidebar/LeftSidebar";
 
 export const Main = () => {
     return (
+
         <Container>
             <Header />
-            <div className="flex flex-row bg-[#F0F5FA] h-screen px-4">
-                <div className="hidden md:block md:w-[70px] bg-gray-50">
-                <LeftSidebar />
+            <div className="flex flex-col md:flex-row px-4">
+                <div className="hidden md:block">
+                    <LeftSidebar />
                 </div>
-                <Box sx={{ flexGrow: 1 }}>
-                    <Grid container spacing={3}>
-                        {/* Mobile: Takes full width (12 columns) */}
-                        <Grid item xs={12} sm={3} md={3}>
-                            <Outlet />
-                        </Grid>
+                <div className="pl-[150px] px-2 pt-32 h-screen min-w-full bg-[#F0F5FA]">
+                    <Box sx={{ flexGrow: 1 }}>
+                        <Grid container spacing={3}>
+                            {/* Mobile: Takes full width (12 columns) */}
+                            <Grid item xs={12} md={3}>
+                                <Outlet />
+                            </Grid>
 
-                        {/* Tablet: Takes 6 columns on small screens and 4 columns on medium and larger screens */}
-                        {/* Hide this Grid item on mobile screens */}
-                        <Grid item xs={6} sm={6} md={5} sx={{ display: { xs: 'none', sm: 'block' } }}>
-                            <Message />
+                            {/* Tablet and larger: Takes 4 columns */}
+                            <Grid item xs={12} md={6}>
+                                <Message />
+                            </Grid>
+                            <Grid item xs={12} md={3}>
+                                <UserProfile />
+                            </Grid>
                         </Grid>
-
-                        {/* Desktop: Takes full width (12 columns) */}
-                        <Grid item xs={12} sm={3} md={3}>
-                            <UserProfile />
-                        </Grid>
-                    </Grid>
-                </Box>
+                    </Box>
+                </div>
             </div>
         </Container>
     )
 }
+
+

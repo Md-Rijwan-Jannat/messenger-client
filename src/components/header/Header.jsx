@@ -7,14 +7,16 @@ import logo from '../../assets/Images/messemger-logo/messenger-logo.png'
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from '../hooks/useAuth';
 import { toast } from 'react-toastify';
+import { LeftSidebar } from '../leftSidebar/LeftSidebar';
 
 export const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [notification, setNotification] = useState(false);
-
-  // modal
   const [isModal, setIsModal] = useState(false);
+  const [isLeftSlider, setIsLeftSlider] = useState(false);
+  const navigate = useNavigate();
 
+  // add request menu
   const openModal = () => {
     setIsModal(!isModal);
   };
@@ -22,9 +24,34 @@ export const Header = () => {
   const closeModal = () => {
     setIsModal(false);
   };
-  const navigate = useNavigate();
+  // add request menu
+  const openLeftSlider = () => {
+    setIsLeftSlider(!isLeftSlider);
+  };
 
-  // Log out
+  const closeLeftSlider = () => {
+    setIsLeftSlider(false);
+  };
+
+
+  // personal info menu
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+  const closeMenu = () => {
+    setIsOpen(false);
+  };
+
+
+  // notification menu
+  const toggleDrop = () => {
+    setNotification(!notification);
+  };
+  const closeDrop = () => {
+    setNotification(false);
+  };
+
+  // Log out handler
   const { user, logOut } = useAuth();
   const logoutHandler = () => {
     logOut()
@@ -49,25 +76,16 @@ export const Header = () => {
         console.log(error)
       });
   }
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-  const closeMenu = () => {
-    setIsOpen(false);
-  };
-  const toggleDrop = () => {
-    setNotification(!notification);
-  };
-  const closeDrop = () => {
-    setNotification(false);
-  };
-
   return (
-    <nav className="bg-white shadow dark:bg-gray-800">
+    <nav className="fixed min-w-full bg-white dark:bg-gray-800">
       <div className="px-4 py-4 mx-auto">
         <div className="flex items-center justify-between">
-          <BiMenuAltLeft className='text-gray-500 block md:hidden' />
+          <div onClick={openLeftSlider} className='w-8 h-8 p-1 text-gray-600 block md:hidden mr-5'>
+            <BiMenuAltLeft onClick={closeLeftSlider} className='w-8 h-8' />
+            <div className='w-[100px]  absolute z-[999] left-0 '>
+              {isLeftSlider && <LeftSidebar />}
+            </div>
+          </div>
           <div className="flex items-center justify-between">
             <div className='hidden md:block'>
               <div className='flex flex-row  items-center gap-3'>
@@ -86,25 +104,25 @@ export const Header = () => {
             {/* add friend button */}
             <button
               onClick={openModal}
-              size='sm' className='text-[10px] md:text-sm bg-blue-500 rounded-md hover:bg-blue-400 font-medium text-white px-3 py-1 md:px-5 flex items-center gap-1'><span className='text-lg mb-1 '>+</span> Add Friends</button>
+              size='sm' className='text-[8px] md:text-[10px] h-[30px] bg-blue-500 rounded-md hover:bg-blue-400 font-semibold text-white px-2 md:px-4 flex items-center gap-1 justify-center'><span className=' '>+</span> Add Friends</button>
 
             {isModal && (
               <div
-                className="fixed inset-0 z-10 overflow-y-auto w-full bg-black bg-opacity-50 transition-all duration-2000 ease-in-out"
+                className="fixed inset-0 z-10 overflow-y-auto w-full  transition-all duration-2000 ease-in-out"
                 aria-labelledby="modal-title"
                 role="dialog"
                 aria-modal="true"
               >
                 <div className='h-screen flex justify-center items-center'>
-                  <div className='md:w-1/3 w-full mx-3 bg-[#F1F6FB] p-5 rounded'>
+                  <div className='md:w-1/3 w-full mx-3 bg-white p-5 rounded'>
                     <div className=' flex items-center justify-between'>
                       <h3 className='text-sm text-gray-500 font-medium text-start my-5 '>+ Add Friend</h3>
                       <span onClick={closeModal}> <BiX /></span>
                     </div>
                     <div className="">
                       <Link
-                        to="/profile"
-                        className="flex items-center py-3  gap-3 transition-colors duration-300 transform border-b border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-700 bg-white rounded p-2"
+                        to="/#"
+                        className="flex items-center py-3  gap-3 transition-colors duration-300 transform border-b border-gray-100 hover:bg-gray-50 dark:hover:bg-gray-700 dark:border-gray-700 bg-gray-50 rounded p-2"
                       >
                         <div className='relative mt-5'>
                           <img
@@ -133,7 +151,7 @@ export const Header = () => {
             {/* Notification */}
             <button
               onClick={toggleDrop}
-              className="mx-4 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
+              className="mx-3 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-200 hover:text-gray-700 dark:hover:text-gray-400 focus:text-gray-700 dark:focus:text-gray-400 focus:outline-none"
               aria-label="show notifications"
             >
               <div className='relative'>
@@ -182,10 +200,10 @@ export const Header = () => {
             <button
               onClick={toggleMenu}
               type="button"
-              className="flex items-center focus:outline-none"
+              className="flex flex-col md:flex md:flex-row items-center focus:outline-none"
               aria-label="toggle profile dropdown"
             >
-              <div className="w-8 h-8 overflow-hidden border-2 border-gray-400 rounded-full">
+              <div className="w-10 flex items-center justify-center h-10 overflow-hidden border-2 border-gray-400 rounded-full">
                 {
                   user ? <img
                     src={user?.photoUrl}
@@ -195,11 +213,11 @@ export const Header = () => {
                 }
               </div>
 
-              <div className='text-gray-500 font-medium flex flex-col '>
+              <div className='text-gray-700 font-medium flex flex-col '>
                 <h3 className="mx-2 text-sm dark:text-gray-200 mb-2">
                   Md Rijwan Jannat
                 </h3>
-                <p className='text-[10px]'>MERN Stack Developer</p>
+                <p className='text-[10px] hidden md:block'>MERN Stack Developer</p>
               </div>
               {isOpen && (
                 <div

@@ -23,7 +23,7 @@ export const LeftSidebar = () => {
   };
 
   return (
-    <div className="relative mt-5">
+    <div className="md:fixed z-[999] left-0 py-10 mt-10 md:top-20 md:mt-5 md:w-[100px] bg-white h-screen bottom-0 flex flex-col items-center">
       <Link
         to="/"
         className="text-gray-500 flex items-center relative mt-5"
@@ -33,7 +33,7 @@ export const LeftSidebar = () => {
         <CiMail
           className={`hover:text-blue-500 text-5xl p-2 ${
             location.pathname === "/"
-              ? "bg-blue-500 rounded-full text-white"
+              ? "bg-blue-500 hover:text-gray-50  rounded-full text-white"
               : ""
           } transition-all duration-800 ease-in-out`}
         />
@@ -52,7 +52,7 @@ export const LeftSidebar = () => {
         <CiEdit
           className={`hover:text-blue-500 text-5xl p-2 ${
             location.pathname === "/create_group"
-              ? "bg-blue-500 rounded-full text-white"
+              ? "bg-blue-500 hover:text-gray-50 rounded-full text-white"
               : ""
           } transition-all duration-800 ease-in-out`}
         />
@@ -71,7 +71,7 @@ export const LeftSidebar = () => {
         <PiUsersThreeLight
           className={`hover:text-blue-500 text-5xl p-2 ${
             location.pathname === "/contacts"
-              ? "bg-blue-500 rounded-full text-white"
+              ? "bg-blue-500 hover:text-gray-50 rounded-full text-white"
               : ""
           } transition-all duration-800 ease-in-out`}
         />
@@ -90,7 +90,7 @@ export const LeftSidebar = () => {
         <CiUser
           className={`hover:text-blue-500 text-5xl p-2 ${
             location.pathname === "/profile"
-              ? "bg-blue-500 rounded-full text-white"
+              ? "bg-blue-500 hover:text-gray-50 rounded-full text-white"
               : ""
           } transition-all duration-800 ease-in-out`}
         />
@@ -109,7 +109,7 @@ export const LeftSidebar = () => {
         <CiLock
           className={`hover:text-blue-500 text-5xl p-2 ${
             location.pathname === "/login"
-              ? "bg-blue-500 rounded-full text-white"
+              ? "bg-blue-500 hover:text-gray-50 rounded-full text-white"
               : ""
           } transition-all duration-800 ease-in-out`}
         />
@@ -128,7 +128,7 @@ export const LeftSidebar = () => {
         <BiUserPlus
           className={`hover:text-blue-500 text-5xl p-2 ${
             location.pathname === "/signUp"
-              ? "bg-blue-500 rounded-full text-white"
+              ? "bg-blue-500 hover:text-gray-50 rounded-full text-white"
               : ""
           } transition-all duration-800 ease-in-out`}
         />
@@ -147,7 +147,7 @@ export const LeftSidebar = () => {
         <CiSettings
           className={`hover:text-blue-500 text-5xl p-2 ${
             location.pathname === "/setting"
-              ? "bg-blue-500 rounded-full text-white"
+              ? "bg-blue-500 hover:text-gray-50 rounded-full text-white"
               : ""
           } transition-all duration-800 ease-in-out`}
         />

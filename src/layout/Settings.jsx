@@ -15,27 +15,24 @@ export const Settings = () => {
     // </div>
     <Container>
       <Header />
+      <div className="flex flex-row px-4">
+        <div className="hidden md:block">
+          <LeftSidebar />
+        </div>
+        <div className="pl-[150px] px-2 pt-32 h-screen min-w-full bg-[#F0F5FA]">
+          <Box sx={{ flexGrow: 1 }}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6} md={6}>
+                <Setting />
+              </Grid>
+              <Grid item xs={12} sm={6} md={6} >
+                <SaveSetting />
+              </Grid>
+            </Grid>
+          </Box>
+        </div>
 
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={3}>
-          {/* Left-side Slide Navbar */}
-          {/* Hide this Grid item on mobile screens */}
-          <Grid item xs={1} sm={1} md={1} sx={{ display: { xs: 'none', sm: 'block', md: 'block' } }}>
-            <LeftSidebar />
-          </Grid>
-
-          {/* Mobile: Takes full width (12 columns) */}
-          <Grid item xs={12} sm={5} md={5}>
-            <Setting />
-          </Grid>
-
-          {/* Tablet: Takes 6 columns on small screens and 4 columns on medium and larger screens */}
-          {/* Hide this Grid item on mobile screens */}
-          <Grid item xs={12} sm={5} md={5} >
-            <SaveSetting />
-          </Grid>
-        </Grid>
-      </Box>
+      </div>
     </Container>
   )
 }

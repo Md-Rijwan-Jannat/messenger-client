@@ -11,11 +11,13 @@ import { SignUp } from "../pages/signUp/SignUp";
 import { Settings } from "../layout/Settings";
 import { Setting } from "../pages/settings/Setting";
 import { Main } from "../layout/Main";
+import NotFoundPage from "../components/NotFoundPage";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main />,
+        errorElement: <NotFoundPage />,
         children: [
             {
                 path: '/',
@@ -38,6 +40,7 @@ export const router = createBrowserRouter([
     {
         path: '/',
         element: <Register />,
+        errorElement: <NotFoundPage />,
         children: [
             {
                 path: '/login',
@@ -52,6 +55,7 @@ export const router = createBrowserRouter([
     {
         path: '/',
         element: <Settings />,
+        errorElement: <NotFoundPage />,
         children: [
             {
                 path: '/setting',

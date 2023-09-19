@@ -2,6 +2,8 @@
 
 export const Profile = () => {
   return (
-    <div>Profile</div>
+    <div>
+      profile
+    </div>
   )
 }
